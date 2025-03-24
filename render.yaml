@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: seedmart-backend
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      # You can add more environment variables as needed
+      # - key: DATABASE_URL
+      #   fromDatabase:
+      #     name: seedmart-db
+      #     property: connectionString
+    healthCheckPath: /health
+    autoDeploy: true
+    plan: starter # Options: free, starter, standard, pro, plus
+    branches:
+      - name: main
+        autoDeployEnabled: true
+    pullRequestPreviewsEnabled: true
+    region: oregon # Options: oregon, frankfurt, ohio, singapore
+    
+# Uncomment if you need a database
+# databases:
+#   - name: seedmart-db
+#     plan: starter
